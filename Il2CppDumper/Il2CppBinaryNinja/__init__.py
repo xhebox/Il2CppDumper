@@ -45,6 +45,8 @@ class Il2CppProcessTask(BackgroundTaskThread):
             addr = get_addr(self.bv, scriptMethod["Address"])
             name = scriptMethod["Name"].replace("$", "_").replace(".", "_")
             signature = scriptMethod["Signature"]
+            # remove duplicated parameter names
+            signature = signature.replace('method,', ', ')
             func = self.bv.get_function_at(addr)
             if func != None:
                 if func.name == name:
